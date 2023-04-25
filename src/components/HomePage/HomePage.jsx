@@ -7,7 +7,7 @@ export const HomePage = () => {
   const { token, userName } = useAuth();
   const loginLink = (
     <Link fontWeight={600} as={RouteLink} to="/login">
-      login
+      log in
     </Link>
   );
   const isLogged = !token ? <Text>Please {loginLink} yourself.</Text> : '';
