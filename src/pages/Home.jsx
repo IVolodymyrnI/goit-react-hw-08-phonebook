@@ -1,5 +1,5 @@
 import { HomePage } from 'components/HomePage/HomePage';
 
-export const Home = () => {
+export default function Home() {
   return <HomePage />;
-};
+}
