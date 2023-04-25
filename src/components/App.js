@@ -1,7 +1,7 @@
 import { Home } from 'pages/Home';
 import { SharedLayout } from 'components/SharedLayout/SharedLayout';
 import { Routes, Route } from 'react-router-dom';
-import { RedirectRoute } from './RedirectRoute';
+import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
 import { lazy } from 'react';
 import { NotFoundPage } from 'pages/NotFoundPage';
@@ -17,11 +17,11 @@ export const App = () => {
         <Route index element={<Home />} />
         <Route
           path="login"
-          element={<RedirectRoute redirectTo={'/'} component={<Login />} />}
+          element={<RestrictedRoute redirectTo={'/'} component={<Login />} />}
         />
         <Route
           path="register"
-          element={<RedirectRoute redirectTo={'/'} component={<SignUp />} />}
+          element={<RestrictedRoute redirectTo={'/'} component={<SignUp />} />}
         />
         <Route
           path="contacts"
