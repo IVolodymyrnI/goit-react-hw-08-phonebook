@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { Flex } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
+import PropTypes from 'prop-types';
 
 import { checkOnUniqueName } from 'utils';
 import { addSchema } from './ContactFormValidation';
@@ -103,4 +104,8 @@ export const ContactForm = ({ onClose }) => {
       </Flex>
     </form>
   );
+};
+
+ContactForm.propTypes = {
+  onClose: PropTypes.func.isRequired,
 };

@@ -6,6 +6,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react';
+import PropTypes from 'prop-types';
 
 import { ContactForm } from 'components/ContactForm/ContactForm';
 
@@ -14,7 +15,9 @@ export function AddContactModal({ isOpen, onClose }) {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent p={8} width={350}>
-        <ModalHeader textAlign='center' p={4}>Add a new contact</ModalHeader>
+        <ModalHeader textAlign="center" p={4}>
+          Add a new contact
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody p={4}>
           <ContactForm onClose={onClose} />
@@ -23,3 +26,8 @@ export function AddContactModal({ isOpen, onClose }) {
     </Modal>
   );
 }
+
+AddContactModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+};

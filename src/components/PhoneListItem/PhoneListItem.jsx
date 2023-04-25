@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { ListItem, Button, Flex, Text } from '@chakra-ui/react';
 import { toast } from 'react-hot-toast';
+import PropTypes from 'prop-types';
 
 import { useDeleteContactMutation } from 'redux/contacts/contactsApi';
 
@@ -40,4 +41,10 @@ export const PhoneListItem = ({ id, name, number }) => {
       )}
     </>
   );
+};
+
+PhoneListItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
 };
