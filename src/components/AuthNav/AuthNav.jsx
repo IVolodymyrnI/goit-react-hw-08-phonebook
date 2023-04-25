@@ -13,9 +13,9 @@ export const AuthNav = () => {
         <BreadcrumbLink
           as={NavLink}
           _activeLink={{ color: 'red' }}
-          to="/register"
+          to="/signup"
         >
-          Register
+          Sign up
         </BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>
