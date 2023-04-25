@@ -1,11 +1,12 @@
-import { List } from './PhoneListStyle';
-import { PhoneNumberListItem } from 'components/PhoneListItem/PhoneListItem';
 import { useSelector } from 'react-redux';
-import { useFetchContactsQuery } from 'redux/operations';
-import { selectFilter } from 'redux/selectors';
+import { UnorderedList } from '@chakra-ui/react';
+
+import { PhoneListItem } from 'components/PhoneListItem/PhoneListItem';
+import { useFetchContactsQuery } from 'redux/contacts/contactsApi';
+import { selectFilter } from 'redux/filter/selectors';
 
 export function PhoneNumberList() {
-  const { data: contacts, isFetching } = useFetchContactsQuery();
+  const { data: contacts } = useFetchContactsQuery();
   const filter = useSelector(selectFilter);
 
   if (!contacts) {
@@ -18,18 +19,12 @@ export function PhoneNumberList() {
 
   return (
     <>
-      {isFetching && <div>Loading...</div>}
       {contacts && (
-        <List>
-          {visiableContacts.map(({ id, name, phoneNumber }) => (
-            <PhoneNumberListItem
-              key={id}
-              id={id}
-              name={name}
-              phoneNumber={phoneNumber}
-            />
+        <UnorderedList styleType="none">
+          {visiableContacts.map(({ id, name, number }) => (
+            <PhoneListItem key={id} id={id} name={name} number={number} />
           ))}
-        </List>
+        </UnorderedList>
       )}
     </>
   );

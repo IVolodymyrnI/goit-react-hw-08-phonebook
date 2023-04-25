@@ -1,29 +1,30 @@
-import { Formik, Form } from 'formik';
-import { Label, Input } from 'components/ContactForm/ContactFormStyle';
-import { useDispatch, useSelector } from 'react-redux';
-import { setFilter } from 'redux/filterSlice';
-import { selectFilter } from 'redux/selectors';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { Box, FormControl, Input } from '@chakra-ui/react';
+
+import { setFilter } from 'redux/filter/filterSlice';
 
 export function FilterByName() {
   const dispatch = useDispatch();
-  const filter = useSelector(selectFilter);
+  const { register, watch } = useForm();
+  const filter = watch('searchName', '');
 
-	const onChange = ({ currentTarget: { value } }) => {
-    dispatch(setFilter(value));
-  };
+  useEffect(() => {
+    dispatch(setFilter(filter));
+  }, [dispatch, filter]);
 
   return (
-    <Formik initialValues={{ findName: '' }}>
-      <Form>
-        <Label htmlFor="name-contact-filter">Find contacts by name</Label>
-        <Input
-          type="text"
-          id="name-contact-filter"
-          name="findName"
-          value={filter}
-          onChange={onChange}
-        ></Input>
-      </Form>
-    </Formik>
+    <Box width={200} mr={4}>
+      <form>
+        <FormControl>
+          <Input
+            placeholder="Search"
+            defaultValue=""
+            {...register('searchName')}
+          />
+        </FormControl>
+      </form>
+    </Box>
   );
 }

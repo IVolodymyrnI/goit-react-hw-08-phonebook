@@ -1,22 +1,43 @@
-import { useDeleteContactMutation } from 'redux/operations';
-import { Info, Item } from './PhoneListItemStyle';
-import { Button } from 'components/ContactForm/ContactFormStyle';
+import { useEffect } from 'react';
+import { ListItem, Button, Flex, Text } from '@chakra-ui/react';
+import { toast } from 'react-hot-toast';
 
-export const PhoneNumberListItem = ({ id, name, phoneNumber }) => {
-  const [deleteContact, { isLoading }] = useDeleteContactMutation();
+import { useDeleteContactMutation } from 'redux/contacts/contactsApi';
+
+export const PhoneListItem = ({ id, name, number }) => {
+  const [deleteContact, { isLoading, isSuccess, isError, error }] =
+    useDeleteContactMutation();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(error);
+    }
+  }, [error, isError]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast(`The contact has been deleted!`, { icon: '🗑️' });
+    }
+  }, [isSuccess]);
 
   return (
-    <Item key={id}>
-      <Info>
-        {name}: {phoneNumber}
-      </Info>
-      <Button
-        type="button"
-        onClick={() => deleteContact(id)}
-        disabled={isLoading}
-      >
-        {isLoading ? 'Deleting' : 'Delete'}
-      </Button>
-    </Item>
+    <>
+      {!isSuccess && (
+        <ListItem mb={4} key={id}>
+          <Flex alignItems="center">
+            <Text fontSize={24} fontWeight={500} mr={4}>
+              {name}: {number}
+            </Text>
+            <Button
+              type="button"
+              onClick={() => deleteContact(id)}
+              isLoading={isLoading}
+            >
+              X
+            </Button>
+          </Flex>
+        </ListItem>
+      )}
+    </>
   );
 };
